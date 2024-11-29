@@ -69,7 +69,7 @@ export default function HomePage() {
 
       {/* Main Content Section */}
       <section className="container mt-5">
-        <h1 className="mt-10">Welcome to MeetSynC</h1>
+        <h1 className="py-3 pt-5">Welcome to MeetSynC</h1>
         <div className="row mt-4 content">
           {/* Form Column */}
           <div className="col-md-6">
@@ -124,7 +124,7 @@ export default function HomePage() {
             <div className="output-area" id="output">
               <div className="output-text">
                 <div className="output-buttons">
-                  <button className="btn btn-success mt-2" onClick={handleDownload}><i className="fa-solid fa-download"></i></button>
+                  <button className="btn btn-success mx-2 mt-2" onClick={handleDownload}><i className="fa-solid fa-download"></i></button>
                   <button className="btn btn-secondary mt-2" onClick={handleCopy}><i className="fa-regular fa-copy"></i></button>
                 </div>
                 <h4>Output</h4>
