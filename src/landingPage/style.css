@@ -58,7 +58,12 @@
   }
 
   /* Drag and Drop Styling */
+  .file-drop-area:hover {
+    background-color: #f1f1f1;
+  }
+  
   .file-drop-area {
+    text-align: center;
     border: 2px dashed #007bff;
     border-radius: 5px;
     padding: 40px;
@@ -112,4 +117,13 @@
 
   .or-divider::after {
     right: 0;
+  }
+
+  .progress {
+    height: 20px;
+  }
+  
+  .progress-bar {
+    background-color: #007bff;
+    text-align: center;
   }
