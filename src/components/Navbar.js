@@ -16,7 +16,7 @@ export default function Navbar() {
           aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
-        </button>~
+        </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <div className="ms-auto">
             <a href="/signup" className="btn btn-primary me-2">Sign Up</a>
