@@ -8,7 +8,6 @@ function FileUpload({ callback }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [progress, setProgress] = useState(0);
   const [uploadStatus, setUploadStatus] = useState("Select"); //"select"||uploading || "done"
-  const [outputText, setOutputText] = useState("None");
 
   const handleFileChange = (event) => {
     if (event.target.files && event.target.files.length > 0) {
@@ -49,11 +48,10 @@ function FileUpload({ callback }) {
               (progressEvent.loaded * 100) / progressEvent.total
             );
             setProgress(percentageCompleted);
-            
+
           },
         }
       );
-      setOutputText();
       setUploadStatus("done");
       callback(response);
     } catch (error) {

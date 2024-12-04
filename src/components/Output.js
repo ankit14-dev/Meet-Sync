@@ -1,36 +1,36 @@
 // src/components/Output.js
-import React from "react";
+import React, { useState } from "react";
 
-export default function Output({ outputText }) {
-  const handleDownload = () => {
-    const blob = new Blob([outputText], { type: "text/plain" });
-    const downloadUrl = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = downloadUrl;
-    link.download = "output.txt";
-    link.click();
-    URL.revokeObjectURL(downloadUrl);
-  };
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(outputText.replace(/<\/?[^>]+(>|$)/g, "")).then(() => {
-      alert("Output copied to clipboard!");
-    });
-  };
+export default function Output({ summary, transcription }) {
+  const [activeTab, setActiveTab] = useState("summary");
 
   return (
     <div className="output-area">
-      <div className="output-buttons">
-        <button className="btn btn-success mx-2" onClick={handleDownload}>
-          <i className="fa-solid fa-download"></i>
-        </button>
-        <button className="btn btn-secondary" onClick={handleCopy}>
-          <i className="fa-regular fa-copy"></i>
-        </button>
+      <h3>Output</h3>
+      <ul className="nav nav-tabs">
+        <li className="nav-item">
+          <button
+            className={`nav-link ${activeTab === "summary" ? "active" : ""}`}
+            onClick={() => setActiveTab("summary")}
+          >
+            Summary
+          </button>
+        </li>
+        <li className="nav-item">
+          <button
+            className={`nav-link ${activeTab === "transcription" ? "active" : ""}`}
+            onClick={() => setActiveTab("transcription")}
+          >
+            Transcription
+          </button>
+        </li>
+      </ul>
+      <div className="tab-content mt-3">
+        {activeTab === "summary" && <p>{summary || "No summary available."}</p>}
+        {activeTab === "transcription" && (
+          <p>{transcription || "No transcription available."}</p>
+        )}
       </div>
-      <h4>Output</h4>
-      <hr />
-      <div dangerouslySetInnerHTML={{ __html: outputText }} />
     </div>
   );
 }

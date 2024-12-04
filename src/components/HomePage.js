@@ -6,14 +6,12 @@ import FileUpload from "./fileUploader/FileUpload";
 import Output from "./Output";
 
 export default function HomePage() {
-  const [outputText, setOutputText] = useState("");
+  const [summary, setSummary] = useState("");
+  const [transcription, setTranscription] = useState("");
 
-  const handleGenerateOutput = (data) => {
-    setOutputText(`
-      <p><strong>URL:</strong> ${data.url || "N/A"}</p>
-      <p><strong>File Name:</strong> ${data.fileName}</p>
-      <p>${data}</p>
-    `);
+  const handleGenerateOutput = (response) => {
+    setSummary(response.summary);
+    setTranscription(response.transcription);
   };
 
   return (
@@ -30,7 +28,7 @@ export default function HomePage() {
             <FileUpload callback={handleGenerateOutput}/>
           </div>
           <div className="col-md-6">
-            <Output outputText={outputText} />
+            <Output summary={summary} transcription={transcription} />
           </div>
         </div>
       </section>
