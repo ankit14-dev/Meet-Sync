@@ -1,5 +1,6 @@
 // src/components/Output.js
 import React, { useState } from "react";
+import "./Output.css";
 
 export default function Output({ summary, transcription }) {
   const [activeTab, setActiveTab] = useState("summary");
@@ -26,7 +27,11 @@ export default function Output({ summary, transcription }) {
         </li>
       </ul>
       <div className="tab-content mt-3">
-        {activeTab === "summary" && <p>{summary || "No summary available."}</p>}
+        {activeTab === "summary" ?(
+          <div className="content-scroll">{summary}</div>
+        ):(
+          <div className="content-scroll">{transcription}</div>
+        )}
         {activeTab === "transcription" && (
           <p>{transcription || "No transcription available."}</p>
         )}

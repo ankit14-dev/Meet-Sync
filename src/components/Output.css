@@ -1,0 +1,17 @@
+/* Output.css */
+.output-area {
+  height: 500px; /* Adjust this value as needed */
+  display: flex;
+  flex-direction: column;
+}
+
+.tab-content {
+  flex: 1;
+  overflow: hidden;
+}
+
+.content-scroll {
+  height: 100%;
+  overflow-y: auto;
+  padding: 1rem;
+}

@@ -48,75 +48,96 @@ function FileUpload({ callback }) {
               (progressEvent.loaded * 100) / progressEvent.total
             );
             setProgress(percentageCompleted);
-
           },
         }
       );
       setUploadStatus("done");
-      callback(response);
+      callback(response.data);
     } catch (error) {
       setUploadStatus("select");
     }
   };
+  const truncateFileName = (fileName, maxLength = 20) => {
+    if (fileName.length <= maxLength) return fileName;
+
+    const extension = fileName.split(".").pop();
+    const nameWithoutExt = fileName.substring(0, fileName.lastIndexOf("."));
+    const truncatedName = nameWithoutExt.substring(0, maxLength - 3) + "...";
+
+    return `${truncatedName}.${extension}`;
+  };
   return (
-    <div>
-      <input
-        ref={inputRef}
-        type="file"
-        onChange={handleFileChange}
-        style={{ display: "none" }}
-      />
-      {!selectedFile && (
-        <button className="file-btn" onClick={onChooseFile}>
-          <span className="material-symbols-outlined">upload</span>
-        </button>
-      )}
-
-      {selectedFile && (
-        <>
-          <div className="file-card">
-            <span class="material-symbols-outlined">description</span>
-            <div className="file-info">
-              <div style={{ flex: 1 }}>
-                {/* {display file name and progress bar} */}
-                <h6>{selectedFile.name}</h6>
-                <div className="progress-bg">
-                  <div className="progress" style={{ width: `${progress}` }} />
-                </div>
-              </div>
-              {/* {Display clear button or upload progress/check mark} */}
-
-              {uploadStatus === "select" ? (
-                <button onClick={clearFileInput}>
-                  <span class="material-symbols-outlined close-icon">
-                    close
-                  </span>
-                </button>
-              ) : (
-                <div className="check-circle">
-                  {uploadStatus === "uploading" ? (
-                    `${progress}%`
-                  ) : uploadStatus === "done" ? (
-                    <span
-                      className="material-symbols-outlined"
-                      style={{ fontSize: "20px" }}
-                    >
-                      check
-                    </span>
-                  ) : null}
-                </div>
-              )}
-            </div>
-          </div>
-          {/* button to fianilise upload or clear selection */}
-          <button className="upload-btn" onClick={handleUpload}>
-            {uploadStatus === "select" || uploadStatus === "uploading"
-              ? "Upload"
-              : "Done"}
+    <>
+      <div>
+        <input
+          ref={inputRef}
+          type="file"
+          onChange={handleFileChange}
+          style={{ display: "none" }}
+        />
+        {!selectedFile && (
+          <button className="file-btn" onClick={onChooseFile}>
+            <span className="material-symbols-outlined">upload</span>Upload File
           </button>
-        </>
-      )}
-    </div>
+        )}
+
+        {selectedFile && (
+          <div className="upload-container-box">
+            <div className="file-card">
+              <span className="material-symbols-outlined">description</span>
+              <div className="file-info">
+                <div style={{ flex: 1 }}>
+                  {/* {display file name and progress bar} */}
+                  <h6>{truncateFileName(selectedFile.name)}</h6>
+                  <div className="progress-bg">
+                    <div
+                      className="progress"
+                      style={{ width: `${progress}%` }}
+                    />
+                  </div>
+                </div>
+                {/* {Display clear button or upload progress/check mark} */}
+
+                {uploadStatus === "select" ? (
+                  <button onClick={clearFileInput}>
+                    <span className="material-symbols-outlined close-icon">
+                      cancel
+                    </span>
+                  </button>
+                ) : (
+                  <div className="check-circle">
+                    {uploadStatus === "uploading" ? (
+                      `${progress}%`
+                    ) : uploadStatus === "done" ? (
+                      <span
+                        className="material-symbols-outlined"
+                        style={{ fontSize: "20px" }}
+                      >
+                        check_circle
+                      </span>
+                    ) : null}
+                  </div>
+                )}
+              </div>
+            </div>
+            {/* button to fianilise upload or clear selection */}
+            <button className="upload-btn" onClick={handleUpload}>
+              {uploadStatus === "select"
+                ? "Upload"
+                : uploadStatus === "uploading"
+                ? "Uploading"
+                : "Done"}
+            </button>
+          </div>
+        )}
+        {uploadStatus === "done" && (
+          <>
+            <div>Your File is Uploaded</div>
+            <button className="generate-btn">Generate Summary</button>
+          </>
+        )}
+      </div>
+    </>
   );
 }
 

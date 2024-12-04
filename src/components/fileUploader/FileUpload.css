@@ -1,5 +1,10 @@
+.upload-container-box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 .file-btn{
-    width: 330px;
+    width: 600px;
     height: 150px;
     font-size: 18px;
     font-weight: 500;
@@ -18,7 +23,7 @@
 }
 .file-btn:hover{
     color: #5d4dcc;
-    background-color: #fff;
+    background-color: #f1efff;
 }
 
 .file-btn span{
@@ -34,7 +39,7 @@
 
 }
 .file-card{
-    width: 300px;
+    width: 500px;
     display: flex;
     align-items: center;
     gap: 15px;
@@ -58,7 +63,7 @@
 
 }
 .progress-bg{
-    width: 100px;
+    width: 350px;
     height: 5px;
     background-color: rgba(0, 0, 0, 0.076);
     border-radius: 8px;
@@ -96,7 +101,19 @@
     border-radius: 30px;
 }
 .upload-btn{
-    width: 330px;
+    width: 100px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    background-color: #7460ff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+.generate-btn{
+    width: 200px;
     font-size: 14px;
     font-weight: 500;
     color: #fff;

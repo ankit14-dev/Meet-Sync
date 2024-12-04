@@ -11,7 +11,7 @@ export default function HomePage() {
 
   const handleGenerateOutput = (response) => {
     setSummary(response.summary);
-    setTranscription(response.transcription);
+    setTranscription(response.transcribe);
   };
 
   return (
@@ -25,7 +25,9 @@ export default function HomePage() {
               onGenerateOutput={handleGenerateOutput}
               onReset={handleResetOutput}
             /> */}
-            <FileUpload callback={handleGenerateOutput}/>
+            <div className="output-area">
+              <FileUpload callback={handleGenerateOutput} />
+            </div>
           </div>
           <div className="col-md-6">
             <Output summary={summary} transcription={transcription} />
