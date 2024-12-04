@@ -21,10 +21,6 @@ export default function HomePage() {
         <h1 className="py-3 pt-5">Welcome to MeetSynC</h1>
         <div className="row mt-4">
           <div className="col-md-6">
-            {/* <FileUpload
-              onGenerateOutput={handleGenerateOutput}
-              onReset={handleResetOutput}
-            /> */}
             <div className="output-area">
               <FileUpload callback={handleGenerateOutput} />
             </div>
