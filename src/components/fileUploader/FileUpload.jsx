@@ -12,6 +12,7 @@ function FileUpload({ callback }) {
   const handleFileChange = (event) => {
     if (event.target.files && event.target.files.length > 0) {
       setSelectedFile(event.target.files[0]);
+      handleUpload();
     }
   };
 
@@ -25,6 +26,11 @@ function FileUpload({ callback }) {
     setProgress(0);
     setUploadStatus("select");
   };
+
+  const handleReset = () => {
+    clearFileInput();
+    callback(null);
+  }
   const handleUpload = async () => {
     //if upload is already done clear and return
     if (uploadStatus === "done") {
@@ -72,8 +78,8 @@ function FileUpload({ callback }) {
         <input
           ref={inputRef}
           type="file"
-          onChange={handleFileChange}
           style={{ display: "none" }}
+          onChange={handleFileChange}
         />
         {!selectedFile && (
           <button className="file-btn" onClick={onChooseFile}>
@@ -121,17 +127,12 @@ function FileUpload({ callback }) {
               </div>
             </div>
             {/* button to fianilise upload or clear selection */}
-            <button className="upload-btn" onClick={handleUpload}>
-              {uploadStatus === "select"
-                ? "Upload"
-                : uploadStatus === "uploading"
-                ? "Uploading"
-                : "Done"}
-            </button>
           </div>
         )}
         {uploadStatus === "done" && (
           <>
+            <button className="upload-btn" onClick={handleReset}>
+            </button>
             <div>Your File is Uploaded</div>
             <button className="generate-btn">Generate Summary</button>
           </>
