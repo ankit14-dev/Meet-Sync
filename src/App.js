@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import React, { useState } from 'react';
 //import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -7,7 +6,7 @@ import HomePage from './components/HomePage';
 
 function App() {
   return (
-    <HomePage></HomePage>
+    <HomePage/>
   )
 }
 
