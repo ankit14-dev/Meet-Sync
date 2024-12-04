@@ -6,17 +6,17 @@ import FileUpload from "./FileUpload";
 import Output from "./Output";
 
 export default function HomePage() {
-  const [outputText, setOutputText] = useState("");
+  const [summary, setSummary] = useState("");
+  const [transcription, setTranscription] = useState("");
 
-  const handleGenerateOutput = (data) => {
-    setOutputText(`
-      <p><strong>URL:</strong> ${data.url || "N/A"}</p>
-      <p><strong>File Name:</strong> ${data.fileName}</p>
-    `);
+  const handleGenerateOutput = (response) => {
+    setSummary(response.summary);
+    setTranscription(response.transcription);
   };
 
   const handleResetOutput = () => {
-    setOutputText(""); // Clear the output text
+    setSummary("");
+    setTranscription("");
   };
 
   return (
@@ -32,7 +32,7 @@ export default function HomePage() {
             />
           </div>
           <div className="col-md-6">
-            <Output outputText={outputText} />
+            <Output summary={summary} transcription={transcription} />
           </div>
         </div>
       </section>

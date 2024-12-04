@@ -10,18 +10,17 @@ export default function FileUpload({ onGenerateOutput, onReset }) {
   const [showProgress, setShowProgress] = useState(false);
   const [isOutputGenerated, setIsOutputGenerated] = useState(false);
 
-  // Simulate file upload progress
   const simulateFileUpload = () => {
     setShowProgress(true);
     setProgress(0);
     const interval = setInterval(() => {
-      setProgress((oldProgress) => {
-        if (oldProgress >= 100) {
+      setProgress((prevProgress) => {
+        if (prevProgress >= 100) {
           clearInterval(interval);
-          setTimeout(() => setShowProgress(false), 2000); // Hide progress bar after 2 seconds
+          setTimeout(() => setShowProgress(false), 2000);
           return 100;
         }
-        return oldProgress + 10;
+        return prevProgress + 10;
       });
     }, 100);
   };
@@ -41,12 +40,14 @@ export default function FileUpload({ onGenerateOutput, onReset }) {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    if (url === previousUrl) {
-      alert("You have already entered this URL.");
-      return;
-    }
-    onGenerateOutput({ url, fileName });
-    setPreviousUrl(url);
+
+    // Mock response object
+    const response = {
+      summary: "This is a sample summary of the uploaded content.",
+      transcription: "This is a transcription of the uploaded content.",
+    };
+
+    onGenerateOutput(response);
     setIsOutputGenerated(true);
   };
 
@@ -56,9 +57,7 @@ export default function FileUpload({ onGenerateOutput, onReset }) {
     setProgress(0);
     setShowProgress(false);
     setIsOutputGenerated(false);
-    setPreviousUrl("");
-    setPreviousFile("");
-    onReset(); // Clear the output display
+    onReset();
   };
 
   return (
@@ -75,6 +74,7 @@ export default function FileUpload({ onGenerateOutput, onReset }) {
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             placeholder="https://example.com"
+            required
           />
         </div>
         <p className="or-divider">OR</p>
