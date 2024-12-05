@@ -39,7 +39,7 @@ function FileUpload({ callback }) {
       formData.append("file", selectedFile);
       //make a asynchronous POST Request to the serverfor file upload
       const response = await axios.post(
-        "http://13.201.188.161:5000/upload",
+        "https://13.201.188.161:5000/upload",
         formData,
         {
           onUploadProgress: (progressEvent) => {
